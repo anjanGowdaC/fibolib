@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">fibosdk</string>
+    <string name="send">Send</string>
+    <string name="close">Close</string>
+</resources>

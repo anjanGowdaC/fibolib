@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+
+    >
+
+
+    <RelativeLayout
+        android:id="@+id/form"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical"
+        android:layout_alignParentStart="true"
+        >
+
+        <EditText
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/chat_text"
+            android:layout_toStartOf="@+id/btn"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/btn"
+            />
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+
+            android:id="@+id/btn"
+            android:onClick="start"
+            android:background="@drawable/send"
+
+
+
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/chat_text"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+    <Button android:layout_alignParentRight="true" android:text="X"
+        android:textColor="#FFF" android:background="@drawable/round_button_background"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_margin="5dp" android:layout_height="25dp"
+        android:layout_width="25dp" android:textSize="12sp" android:textStyle="bold"
+        android:onClick="cancelActivity" />
+
+</RelativeLayout>

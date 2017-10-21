@@ -1,0 +1,98 @@
+apply plugin: 'com.android.library'
+//apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+}
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+//    lintOptions {
+//        abortOnError false
+//    }
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        group = 'com.rytangle.fibolib' // Change this to match your package name
+        version = '1.0.0' // Change this to match your version number
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    apply plugin: 'maven'
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+//    compile 'com.android.support:appcompat-v7:26'
+    testCompile 'junit:junit:4.12'
+}
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+task generateJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath()
+            .join(File.pathSeparator))
+}
+
+//generateJavadocsJar.dependsOn generateJavadocs
+
+task generateJavadocsJar(type: Jar) {
+    from generateJavadocs.destinationDir
+    classifier 'javadoc'
+}
+
+//task generateJavadocsJar(type: Jar) {
+//    failOnError false
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+
+
+artifacts {
+    archives generateSourcesJar
+    archives generateJavadocsJar
+
+}
+
+bintray {
+    user = 'anjan'
+    key = '3b224289dde5458068478f49fa7e14eb4a94c4e4'
+    pkg {
+        repo = 'Maven_APP_Repo'
+        name = 'com.rytangle.fibolib'
+
+        version {
+            name = '1.0.0'
+            desc = 'Chat library'
+            released  = new Date()
+            vcsTag = '1.0.0'
+        }
+
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/anjanGowdaC/fibolib.git'
+        websiteUrl = 'https://github.com/anjanGowdaC/fibolib'
+    }
+    configurations = ['archives']
+}
